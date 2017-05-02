@@ -1,8 +1,8 @@
 module.exports = {
-  'auth': require('./controllers/authController'),
-  'role': require('./controllers/roleController'),
-  'user': require('./controllers/userController'),
+  'auth': { controller: require('./controllers/authController'), model: require('./models/user') },
+  'role': { controller: require('./controllers/baseController'), model: require('./models/role') },
+  'user': { controller: require('./controllers/baseController'), model: require('./models/user') },
 
-  'task': require('./controllers/taskController'),
-  'taskList': require('./controllers/taskListController'),
+  'task': { controller: require('./controllers/baseController'), model: require('./models/task') },
+  'taskList': { controller: require('./controllers/baseController'), model: require('./models/taskList') },
 };

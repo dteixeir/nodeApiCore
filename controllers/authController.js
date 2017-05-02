@@ -1,9 +1,10 @@
 var jwt = require('jsonwebtoken');
 var config = require('../config.js');
+// still need to encrypt pass and salt?
 
-module.exports = (app, route) => {
+module.exports = (app, route, _collection) => {
   var success = async (user, res) => {
-    const token = await jwt.sign(user, config.secret, { expiresIn: '1h' });
+    const token = await jwt.sign(user, config.secret, { expiresIn: '5h' });
     res.status(200).json({ token: token });
   };
 
@@ -13,7 +14,7 @@ module.exports = (app, route) => {
 
   app.post('/auth', async (req, res, next) => {
     try {
-      const user = await app.models.user.findOne({ Username: req.body.username });
+      const user = await _collection.findOne({ Username: req.body.username });
       (user && user.Password === req.body.password) ? success(user, res) : failure(res);
     } catch (err) {
       failure(res);

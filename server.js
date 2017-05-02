@@ -1,7 +1,8 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var _db = require('mongodb').MongoClient;
+
+// Promisify Mongoose
 var promisify = require('promisify-node');
 var impMongoose = require('mongoose');
 impMongoose.Promise = global.Promise;
@@ -24,7 +25,6 @@ app.use(function (req, res, next) {
 });
 
 // Connect to MongoDB
-//var mongoose = promisify(mongoose.connect, { context: mongoose });
 mongoose.connect('mongodb://localhost/taskList');
 
 mongoose.connection.once('open', () => {
@@ -33,8 +33,8 @@ mongoose.connection.once('open', () => {
 
   // Load the routes.
   var routes = require('./routes');
-  _.each(routes, (controller, route) => {
-    app.use(route, controller(app, route));
+  _.each(routes, (routConfig, route) => {
+    app.use(route, routConfig.controller(app, route, routConfig.model));
   });
 
   console.log('Listening on port 3000...');
