@@ -30,11 +30,10 @@ mongoose.connect('mongodb://localhost/taskList');
 mongoose.connection.once('open', () => {
   // Load the routes.
   var routes = require('./routes');
-  _.each(routes, (routConfig, route) => {
-    app.use(route, routConfig.controller(app, route, routConfig.model));
+  _.each(routes, (routeConfig, route) => {
+    app.use(route, routeConfig.controller(app, route, routeConfig.model, routeConfig.actions));
   });
 
   console.log('Listening on port 3000...');
-
   app.listen(3000);
 });

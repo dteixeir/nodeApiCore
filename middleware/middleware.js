@@ -7,11 +7,11 @@ var errorLog = require('../models/errorLog.js');
 var stringResource = require('../stringResource.js');
 
 module.exports = {
-  middleWare: async (req, res, next, collection) => {
+  middleWare: async (req, res, next, collection, actions) => {
     try {
       await auth.verify(req, res, next);
       req = await autoUpdate.autoUpdate(req, res, next);
-      var result = await resource.resource(req, res, collection);
+      var result = await resource.resource(req, res, collection, actions);
       return result;
     } catch (err) {
       // If in prod send back generic 400 and log error
