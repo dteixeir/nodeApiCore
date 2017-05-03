@@ -4,7 +4,8 @@ var base = require('./base');
 var ErrorLogSchema = {
   Message: { type: String, required: true },
   File: { type: String, required: true },
-  Route: { type: String }
+  Route: { type: String },
+  Collection: { type: String }
 };
 
 ErrorLogSchema = new mongoose.Schema(ErrorLogSchema, { timestamps: true });

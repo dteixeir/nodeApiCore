@@ -21,7 +21,7 @@ module.exports = {
       }
 
       return req;
-      
+
     } catch (err) {
       throw { Message: err, File: __filename };
     }

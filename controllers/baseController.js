@@ -2,7 +2,7 @@ var mw = require('../middleware/middleware.js');
 
 module.exports = (app, route, _collection) => {
   try {
-    app.get(`/${route}/:id?`, async (req, res, next) => {
+    app.get(`/${route}/:id?/:populate?`, async (req, res, next) => {
       await mw.middleWare(req, res, next, _collection);
     });
 

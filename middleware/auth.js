@@ -7,8 +7,10 @@ module.exports = {
     var token = req.headers[ 'token' ];
 
     try {
-      if (!token) throw stringResource.error[401];
+      if (!token) throw stringResource.error[ 401 ];
       var verified = await jwt.verify(token, config.secret);
+
+      // add middleware for control points?
 
       req.user = {
         ...verified._doc

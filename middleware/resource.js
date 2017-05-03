@@ -3,9 +3,12 @@ var options = { upsert: true, new: true };
 var _ = require('lodash');
 
 module.exports = {
-  resource: async (req, res, collection, options = options, populate = '') => {
+  resource: async (req, res, collection, options = options) => {
     try {
       var result = {};
+
+      // Currently only supports one level deep for populate. Couldn't get multi-level to work.
+      var populate = req.params.populate ? req.params.populate.split(',') : '';
 
       switch (req.originalMethod) {
         case 'GET':
