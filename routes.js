@@ -4,5 +4,5 @@ module.exports = {
   'user': { controller: require('./controllers/baseController'), model: require('./models/user') },
 
   'task': { controller: require('./controllers/baseController'), model: require('./models/task') },
-  'taskList': { controller: require('./controllers/baseController'), model: require('./models/taskList') },
+  'taskList': { controller: require('./controllers/baseController'), model: require('./models/taskList') }
 };

@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var base = require('./base');
-var mw = require('../middleware/auth.js');
 
 var RoleSchema = {
   Name: { type: String, required: true },

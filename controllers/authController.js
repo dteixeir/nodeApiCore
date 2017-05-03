@@ -1,28 +1,31 @@
 var jwt = require('jsonwebtoken');
 var config = require('../config.js');
+var stringResource = require('../stringResource.js')
 // still need to encrypt pass and salt?
 
 module.exports = (app, route, _collection) => {
-  var success = async (user, res) => {
-    const token = await jwt.sign(user, config.secret, { expiresIn: '5h' });
-    res.status(200).json({ token: token });
-  };
+  try {
+    var success = async (user, res) => {
+      const token = await jwt.sign(user, config.secret, { expiresIn: '5h' });
+      res.status(200).json({ token: token });
+    };
 
-  var failure = (res) => {
-    res.status(400).send({ error: "Failed to log in." });
-  }
+    var failure = (res) => {
+      res.status(400).send({ error: stringResource.error[ '400' ].loginFail });
+    };
 
-  app.post('/auth', async (req, res, next) => {
-    try {
+    app.post('/auth', async (req, res, next) => {
       const user = await _collection.findOne({ Username: req.body.username });
       (user && user.Password === req.body.password) ? success(user, res) : failure(res);
-    } catch (err) {
-      failure(res);
-    }
-  });
+    });
 
-  // Return middleware.
-  return (req, res, next) => {
-    next();
-  };
+    // Return middleware.
+    return (req, res, next) => {
+      next();
+    };
+  } catch (err) {
+    throw { Message: err, File: __filename, Collection: _collection.collection.collectionName };
+  }
+
+
 };

@@ -21,9 +21,9 @@ module.exports = {
       }
 
       return req;
+      
     } catch (err) {
-      console.log('error', err);
-      res.status(400).send({ error: 'Unable to perform action.' });
+      throw { Message: err, File: __filename };
     }
   }
 }

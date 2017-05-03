@@ -2,6 +2,9 @@
 var auth = require('./auth.js');
 var autoUpdate = require('./autoUpdate.js');
 var resource = require('./resource.js');
+var config = require('../config.js');
+var errorLog = require('../models/errorLog.js');
+var stringResource = require('../stringResource.js');
 
 module.exports = {
   middleWare: async (req, res, next, collection) => {
@@ -11,8 +14,13 @@ module.exports = {
       var result = await resource.resource(req, res, collection);
       return result;
     } catch (err) {
-      console.log('error', err);
-      res.status(400).send({ error: 'Something seems to have failed, sorry.' });
+      // Catching errors here to log and send bad request back to user!
+      if (config.env === 'dev') {
+        res.status(400).send({ error: err });
+      } else {
+        var result = await errorLog.create(err);
+        res.status(400).send(stringResource.error[400].resourceFailed);
+      }
     }
   }
 }
