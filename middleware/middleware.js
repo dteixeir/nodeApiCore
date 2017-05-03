@@ -14,12 +14,13 @@ module.exports = {
       var result = await resource.resource(req, res, collection);
       return result;
     } catch (err) {
-      // Catching errors here to log and send bad request back to user!
+      // If in prod send back generic 400 and log error
+      // If dev then send error back
       if (config.env === 'dev') {
         res.status(400).send({ error: err });
       } else {
         var result = await errorLog.create(err);
-        res.status(400).send(stringResource.error[400].resourceFailed);
+        res.status(400).send(stringResource.error[ 400 ].resourceFailed);
       }
     }
   }
