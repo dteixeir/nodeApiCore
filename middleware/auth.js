@@ -1,6 +1,6 @@
 var jwt = require('jsonwebtoken');
 var config = require('../config.js');
-var stringResource = require('../stringResource.js')
+var stringResource = require('../stringResource.js');
 
 module.exports = {
   verify: async (req, res, next) => {

@@ -10,7 +10,7 @@ module.exports = {
   middleWare: async (req, res, next, collection, actions) => {
     try {
       await auth.verify(req, res, next);
-      req = await autoUpdate.autoUpdate(req, res, next);
+      req = await autoUpdate.autoUpdate(req, res, next, collection);
       var result = await resource.resource(req, res, collection, actions);
       return result;
     } catch (err) {

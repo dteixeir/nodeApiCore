@@ -1,16 +1,16 @@
 {
   "name": "node-api-core",
   "version": "1.0.0",
-  "description": "Express Server with SqlServer DB",
+  "description": "Express Server with Mongoose/MongoDB to dynamically build routes based off mongoose models.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js --exec babel-node"
   },
-  "author": "",
+  "author": "Danny Teixeira",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^1.0.2",
+    "bcryptjs": "^1.0.2",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "jsonwebtoken": "^7.4.0",
@@ -21,6 +21,7 @@
     "mssql": "^4.0.4",
     "node-restful": "^0.2.6",
     "promisify": "0.0.3",
+    "promisify-node": "^0.4.0",
     "resourcejs": "^1.7.0"
   },
   "devDependencies": {
