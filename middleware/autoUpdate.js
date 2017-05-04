@@ -18,6 +18,15 @@ module.exports = {
             UpdatedBy: new ObjectID(req.user._id)
           };
           break;
+
+        case 'DELETE':
+          req.body = {
+            ...req.body,
+            UpdatedBy: new ObjectID(req.user._id),
+            IsDeleted: true,
+            IsActive: false
+          };
+          break;
       }
 
       return req;
