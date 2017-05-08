@@ -3,8 +3,6 @@ var bcrypt = require('bcryptjs');
 var config = require('../config.js');
 var stringResource = require('../stringResource.js');
 
-// still need to encrypt pass || salt?
-
 module.exports = (app, route, _collection) => {
   try {
     var success = async (user, res) => {

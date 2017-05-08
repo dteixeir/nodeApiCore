@@ -41,7 +41,8 @@ module.exports = {
       }
 
       if (_.isEmpty(result)) throw stringResource.error[ 400 ].resourceFailed;
-      res.send(result);
+      return result;
+
     } catch (err) {
       throw { Message: err, File: __filename, Collection: collection.collection.collectionName };
     }
