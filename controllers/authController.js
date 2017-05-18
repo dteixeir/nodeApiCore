@@ -26,6 +26,4 @@ module.exports = (app, route, _collection) => {
   } catch (err) {
     throw { Message: err, File: __filename, Collection: _collection.collection.collectionName };
   }
-
-
 };
